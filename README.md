@@ -34,7 +34,7 @@
 
 ## 支持与反馈
 如果有任何问题或需要帮助，请通过以下方式联系我们：
-- 发送邮件至 [caowenxu2008@qq.com](mailto:support@stealthynovelreader.com)
+- 发送邮件至 [caowenxu2008@qq.com]
 
 希望您使用 **moyuKing** 能在忙碌的工作之余，享受到阅读带来的乐趣和放松！
 
