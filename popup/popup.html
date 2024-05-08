@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"> 
+    <title>摸鱼king</title>
+    <link rel="stylesheet" type="text/css" href="popup.css"/>
+</head>
+<body>
+    <div>
+        <div class="row">
+            <div class="lable">导入小说:</div>
+            <div class="btn" id="importBtn">导入</div>
+        </div>
+        <div class="row">
+            <div class="lable">选择小说:</div>
+            <select id="mySelect" name="mySelect">
+            </select>
+        </div>
+        <div class="row">
+            <div class="lable">页码:</div>
+            <input class="value" oninput = "value=value.replace(/[^\d]/g,'')" id="myPageNum"/>
+        </div>
+        <div class="row">
+            <div class="lable">每页字符:</div>
+            <input class="value" oninput = "value=value.replace(/[^\d]/g,'')" id="myPageSize"/>
+            </select>
+        </div>
+        <input style="display: none;" type="file" id="fileInput">
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html>

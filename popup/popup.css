@@ -1,0 +1,20 @@
+.row{
+    display: flex;
+    margin-top: 10px;
+}
+.lable{
+    width: 100px;
+}
+.value{
+    flex: 1;
+}
+.btn{
+    width: 35px;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 3px;
+    background-color: #409EFF;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+}
