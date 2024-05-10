@@ -89,6 +89,7 @@ const openDB = () => {
     const request = indexedDB.open("FileDB", 1);
     request.onupgradeneeded = function (event) {
       let db = event.target.result;
+      let transaction = event.target.transaction; // 获取引用的事务
       if (!db.objectStoreNames.contains("files")) {
         db.createObjectStore("files", { keyPath: "id", autoIncrement: true });
       }
@@ -99,7 +100,7 @@ const openDB = () => {
         if (cursor) {
           var updateData = cursor.value;
           updateData.pageNum = updateData.pageNum || 0; // 默认值
-          updateData.pageSize = updateData.pageSize || 0; // 默认值
+          updateData.pageSize = updateData.pageSize || 20; // 默认值
           cursor.update(updateData);
           cursor.continue();
         }
@@ -158,7 +159,12 @@ const saveToDB = async (content, name) => {
     pageNum: 0,
     pageSize: 20,
   });
-  request.onsuccess = () => console.log("File content saved to DB");
+  request.onsuccess = () => {
+    let id = request.result;
+    IDBUtil.updateId(id).then(() => {
+      initData(id);
+    });
+  };
   request.onerror = () => console.error("Error saving file content to DB");
 };
 
