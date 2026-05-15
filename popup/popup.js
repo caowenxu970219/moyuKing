@@ -43,7 +43,16 @@ document
     if (!file) return;
     const reader = new FileReader();
     reader.onload = async (e) => {
-      const content = e.target.result;
+      const arrayBuffer = e.target.result;
+      let content = "";
+      try {
+        const utf8Decoder = new TextDecoder('utf-8', { fatal: true });
+        content = utf8Decoder.decode(arrayBuffer);
+      } catch (err) {
+        console.log("UTF-8 decode failed, using GBK");
+        const gbkDecoder = new TextDecoder('gbk');
+        content = gbkDecoder.decode(arrayBuffer);
+      }
       chrome.runtime.sendMessage(
         { action: "saveToDB", data: { content, name: file.name } },
         function (response) {
@@ -52,7 +61,7 @@ document
       );
       // await saveToDB(content, file.name); // 读取文件内容后保存到DB
     };
-    reader.readAsText(file);
+    reader.readAsArrayBuffer(file);
   });
 
 // 函数来动态添加选项到下拉选择框
