@@ -87,6 +87,11 @@ document.addEventListener('mouseup', () => {
 });
 
 let handelPage = (e) => {
+  const activeEl = document.activeElement;
+  if (activeEl) {
+    const tag = activeEl.tagName.toLowerCase();
+    if (tag === 'input' || tag === 'textarea' || activeEl.isContentEditable) return;
+  }
   const key = e.key ? e.key.toLowerCase() : '';
   if (key === 'd' || e.keyCode == 68) {
     //下一页
@@ -118,7 +123,7 @@ let handelPage = (e) => {
 // 触发
 document.addEventListener("keydown", function (e) {
   const key = e.key ? e.key.toLowerCase() : '';
-  if ((e.ctrlKey || e.metaKey) && (key === 'm' || e.keyCode == 77)) {
+  if ((e.ctrlKey || e.altKey) && (key === 'm' || e.keyCode == 77)) {
     // let dom = document.getElementById('moyuKingDom')
     if (floatingElement.style.display === "none") {
       floatingElement.style.display = "block";
