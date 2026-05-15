@@ -177,3 +177,36 @@ document
     );
   });
 loadOptionsFromDb();
+
+// 样式配置逻辑
+const styleInputs = ['bgColor', 'bgOpacity', 'textColor', 'textOpacity'];
+
+const saveAndApplyStyles = () => {
+  const styles = {
+    bgColor: document.getElementById('bgColor').value,
+    bgOpacity: parseFloat(document.getElementById('bgOpacity').value),
+    textColor: document.getElementById('textColor').value,
+    textOpacity: parseFloat(document.getElementById('textOpacity').value),
+  };
+
+  chrome.storage.local.set({ moyuStyles: styles }, () => {
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+      if (tabs[0]) {
+        chrome.tabs.sendMessage(tabs[0].id, { action: "UPDATE_STYLE", data: styles });
+      }
+    });
+  });
+};
+
+styleInputs.forEach(id => {
+  document.getElementById(id).addEventListener('input', saveAndApplyStyles);
+});
+
+chrome.storage.local.get(['moyuStyles'], function(result) {
+  if (result.moyuStyles) {
+    if (result.moyuStyles.bgColor) document.getElementById('bgColor').value = result.moyuStyles.bgColor;
+    if (result.moyuStyles.bgOpacity !== undefined) document.getElementById('bgOpacity').value = result.moyuStyles.bgOpacity;
+    if (result.moyuStyles.textColor) document.getElementById('textColor').value = result.moyuStyles.textColor;
+    if (result.moyuStyles.textOpacity !== undefined) document.getElementById('textOpacity').value = result.moyuStyles.textOpacity;
+  }
+});

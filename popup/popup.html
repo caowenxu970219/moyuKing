@@ -25,6 +25,22 @@
             <input class="value" oninput = "value=value.replace(/[^\d]/g,'')" id="myPageSize"/>
             </select>
         </div>
+        <div class="row">
+            <div class="lable">背景颜色:</div>
+            <input class="value" type="color" id="bgColor" value="#000000">
+        </div>
+        <div class="row">
+            <div class="lable">背景透明:</div>
+            <input class="value" type="range" id="bgOpacity" min="0" max="1" step="0.1" value="0.1">
+        </div>
+        <div class="row">
+            <div class="lable">文字颜色:</div>
+            <input class="value" type="color" id="textColor" value="#ffffff">
+        </div>
+        <div class="row">
+            <div class="lable">文字透明:</div>
+            <input class="value" type="range" id="textOpacity" min="0" max="1" step="0.1" value="1">
+        </div>
         <input style="display: none;" type="file" id="fileInput">
     </div>
     <script src="popup.js"></script>
